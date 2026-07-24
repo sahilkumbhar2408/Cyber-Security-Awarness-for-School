@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe Schools - Advanced Cybersecurity Awareness</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --accent: #dc2626;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --gray: #6b7280;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 120px 2rem 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        /* Threats Grid */
+        .threats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .threat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .threat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .threat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .threat-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Interactive Quiz */
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-question {
+            display: none;
+        }
+
+        .quiz-question.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: var(--light);
+        }
+
+        .option.correct {
+            background: #dcfce7;
+            border-color: var(--secondary);
+        }
+
+        .option.incorrect {
+            background: #fef2f2;
+            border-color: var(--accent);
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                CyberSafe Schools
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#threats">Threats</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Stay Safe Online</h1>
+            <p>Advanced Cybersecurity Awareness for Students, Teachers & Parents. Learn to protect yourself from digital threats in today's connected world.</p>
+            <a href="#threats" class="cta-button">Start Learning Now</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">93%</span>
+                    Students use social media daily
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1 in 4</span>
+                    School devices targeted yearly
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">$6.9M</span>
+                    Average breach cost
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">300K</span>
+                    New malware daily
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threats Section -->
+    <section id="threats">
+        <div class="container">
+            <h2 class="section-title">Common Cyber Threats</h2>
+            <div class="threats-grid">
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-phishing"></i>
+                    </div>
+                    <h3>Phishing Attacks</h3>
+                    <p>Fake emails and websites trying to steal your login information. Always check sender addresses and hover over links before clicking.</p>
+                    <strong>Tip:</strong> Never click suspicious links. Verify before sharing info.
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-lock-open"></i>
+                    </div>
+                    <h3>Weak Passwords</h3>
+                    <p>Simple passwords are easily guessed. Use 12+ characters with letters, numbers, and symbols.</p>
+                    <strong>Tip:</strong> Use a password manager and enable 2FA everywhere.
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Malware</h3>
+                    <p>Virus, ransomware, and spyware that infects devices. Download only from trusted sources.</p>
+                    <strong>Tip:</strong> Keep antivirus updated and avoid pirated software.
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Social Engineering</h3>
+                    <p>Trickery to manipulate you into giving information. Attackers pretend to be trustworthy.</p>
+                    <strong>Tip:</strong> Verify identities through multiple channels.
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Public WiFi Risks</h3>
+                    <p>Unsecured networks expose your data. Hackers can intercept traffic on open networks.</p>
+                    <strong>Tip:</strong> Use VPN on public WiFi and avoid sensitive transactions.
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Security</h3>
+                    <p>Misconfigured cloud accounts expose data. School Google Drives often have weak sharing settings.</p>
+                    <strong>Tip:</strong> Review sharing permissions regularly.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Quiz -->
+    <section id="quiz" class="stats">
+        <div class="container">
+            <h2 class="section-title">Test Your Knowledge</h2>
+            <div class="quiz-container">
+                <div id="quizProgress" style="text-align: center; margin-bottom: 2rem; font-size: 1.2rem; font-weight: bold;">
+                    Question 1 of 5
+                </div>
+                
+                <div class="quiz-question active" data-question="1">
+                    <div class="question-text">What should you do if you receive a suspicious email?</div>
+                    <div class="options">
+                        <div class="option" data-correct="true">Delete it without clicking anything</div>
+                        <div class="option">Click links to verify legitimacy</div>
+                        <div class="option">Reply asking for more information</div>
+                        <div class="option">Forward to all your friends</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="2">
+                    <div class="question-text">What's the strongest password?</div>
+                    <div class="options">
+                        <div class="option">password123</div>
+                        <div class="option" data-correct="true">Tr0ub4dor&3xplor3r!</div>
+                        <div class="option">123456</div>
+                        <div class="option">firstname</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="3">
+                    <div class="question-text">What does 2FA stand for?</div>
+                    <div class="options">
+                        <div class="option">Two Factor Authentication</div>
+                        <div class="option" data-correct="true">Two-Factor Authentication</div>
+                        <div class="option">Two File Access</div>
+                        <div class="option">Two Folder Authorization</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="4">
+                    <div class="question-text">Should you use public WiFi for banking?</div>
+                    <div class="options">
+                        <div class="option" data-correct="true">No, use a VPN or cellular data</div>
+                        <div class="option">Yes, it's usually secure</div>
+                        <div class="option">Only during school hours</div>
+                        <div class="option">Yes, if you type fast</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="5">
+                    <div class="question-text">What’s the first step after suspecting malware?</div>
+                    <div class="options">
+                        <div class="option">Continue using the device</div>
+                        <div class="option">Tell IT immediately</div>
+                        <div class="option" data-correct="true">Disconnect from internet and report</div>
+                        <div class="option">Restart the computer</div>
+                    </div>
+                </div>
+
+                <div id="quizResults" style="display: none; text-align: center; margin-top: 2rem;">
+                    <h3 id="resultsTitle"></h3>
+                    <p id="resultsText"></p>
+                    <button onclick="restartQuiz()" style="background: var(--primary); color: white; border: none; padding: 1rem 2rem; border-radius: 25px; font-size: 1.1rem; cursor: pointer; margin-top: 1rem;">Take Quiz Again</button>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="nextBtn" onclick="nextQuestion()" style="background: var(--primary); color: white; border: none; padding: 1rem 2rem; border-radius: 25px; font-size: 1.1rem; cursor: pointer; display: none;">Next Question</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources -->
